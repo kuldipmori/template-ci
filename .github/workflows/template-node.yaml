@@ -1,0 +1,32 @@
+name: central-template-node
+
+on:
+  push:
+    branches:
+      - main
+      - template
+      
+jobs: 
+  node-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install packages based on package.json
+        run: npm install
+
+      - name: Build Node.js code
+        run: npm run build      
+
+      - name: List all directories after build
+        run: ls -lah
