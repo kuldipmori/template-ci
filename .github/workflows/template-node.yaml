@@ -1,16 +1,18 @@
 name: Template Node Workflow
 
 on:
-  push:
-    branches:
-      - main  # Adjust as necessary
+  workflow_call:
+    inputs:
+      example_input:
+        required: true
+        type: string
 
 jobs:
   node-build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x] 
+        node-version: [18.x]
 
     steps:
       - name: Checkout code
