@@ -1,21 +1,19 @@
-name: central-template-node
+name: Template Node Workflow
 
 on:
-  workflow_call:
-    inputs:
-      example_input:
-        required: true
-        type: string
-  
-jobs: 
+  push:
+    branches:
+      - main  # Adjust as necessary
+
+jobs:
   node-build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [18.x] 
 
     steps:
-      - name: Code checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Install Node.js version
@@ -23,11 +21,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install packages based on package.json
+      - name: Install packages
         run: npm install
 
       - name: Build Node.js code
-        run: npm run build      
+        run: npm run build
 
-      - name: List all directories after build
+      - name: List directories after build
         run: ls -lah
