@@ -3,9 +3,12 @@ name: Template Node Workflow
 on:
   workflow_call:
     inputs:
-      example_input:
+      example_input:  # Optional input for the reusable workflow
         required: true
         type: string
+    secrets:
+      REPO_TOKEN:  # Declare that this secret can be passed in
+        required: true
 
 jobs:
   node-build:
