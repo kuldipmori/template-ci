@@ -1,11 +1,12 @@
 name: central-template-node
 
 on:
-  push:
-    branches:
-      - main
-      - template
-      
+  workflow_call:
+    inputs:
+      example_input:
+        required: true
+        type: string
+  
 jobs: 
   node-build:
     runs-on: ubuntu-latest
